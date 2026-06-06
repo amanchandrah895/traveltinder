@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RotateCcw, MapPin, Wallet } from 'lucide-react';
+import { RotateCcw, MapPin, Wallet, ExternalLink } from 'lucide-react';
 import './ListScreen.css';
+
+function googleSearch(name) {
+  return `https://www.google.com/search?q=${encodeURIComponent(name + ' Bangalore')}&tbm=isch`;
+}
 
 function formatBudget(inr) {
   if (inr === 0) return 'Free';
@@ -55,6 +59,16 @@ export default function SkippedScreen({ skipped, onRestore }) {
                       <RotateCcw size={14} />
                       Move to Saved
                     </button>
+                    <a
+                      href={googleSearch(place.name)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="list-google-btn"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <ExternalLink size={12} />
+                      See photos
+                    </a>
                   </div>
                 </div>
               </motion.div>

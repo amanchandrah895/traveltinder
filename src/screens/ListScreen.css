@@ -115,6 +115,9 @@
   transition: all var(--transition-smooth);
 }
 
+.list-action-btn:hover { background: var(--surface-2); }
+.list-action-btn:active { transform: scale(0.95); }
+
 .list-action-btn--star {
   background: var(--accent-light);
   border-color: rgba(232,146,74,0.35);
@@ -143,4 +146,26 @@
   border-color: var(--reject);
   color: var(--reject);
   background: rgba(224,85,85,0.08);
+}
+
+.list-google-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  transition: all var(--transition-smooth);
+}
+
+.list-google-btn:hover {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border-hover);
 }

@@ -3,8 +3,12 @@ import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import {
   MapPin, Clock, Wallet, X, Heart, Info,
-  Bike, Train, Car, RotateCcw, ArrowRight
+  Bike, Train, Car, RotateCcw, ArrowRight, ExternalLink
 } from 'lucide-react';
+
+function googleSearch(name) {
+  return `https://www.google.com/search?q=${encodeURIComponent(name + ' Bangalore')}&tbm=isch`;
+}
 import './SwipeScreen.css';
 
 function getCommuteIcon(commute) {
@@ -138,6 +142,16 @@ function PlaceCard({ place, onSwipe, isTop, style }) {
           >
             <p className="swipe-couple-appeal">{place.couple_appeal}</p>
             <p className="swipe-commute">{place.commute}</p>
+            <a
+              href={googleSearch(place.name)}
+              target="_blank"
+              rel="noreferrer"
+              className="swipe-google-btn"
+              onClick={e => e.stopPropagation()}
+            >
+              <ExternalLink size={12} />
+              See photos on Google
+            </a>
           </motion.div>
         )}
       </div>

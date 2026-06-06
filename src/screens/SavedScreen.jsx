@@ -1,6 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { Bookmark, Star, Trash2, MapPin, Wallet } from 'lucide-react';
+import { Bookmark, Star, Trash2, MapPin, Wallet, ExternalLink } from 'lucide-react';
 import './ListScreen.css';
+
+function googleSearch(name) {
+  return `https://www.google.com/search?q=${encodeURIComponent(name + ' Bangalore')}&tbm=isch`;
+}
 
 function formatBudget(inr) {
   if (inr === 0) return 'Free';
@@ -44,6 +48,16 @@ function PlaceListItem({ place, onRemove, onAddMustVisit, showMustVisit = true, 
               Must Visit
             </button>
           )}
+          <a
+            href={googleSearch(place.name)}
+            target="_blank"
+            rel="noreferrer"
+            className="list-google-btn"
+            onClick={e => e.stopPropagation()}
+          >
+            <ExternalLink size={12} />
+            See photos
+          </a>
           <button
             className="list-action-btn list-action-btn--remove"
             onClick={() => onRemove(place.id)}

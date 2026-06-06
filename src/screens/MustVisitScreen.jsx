@@ -2,9 +2,13 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Star, CheckCircle, Clock, Plus, X, Pencil,
-  MapPin, Wallet
+  MapPin, Wallet, ExternalLink
 } from 'lucide-react';
 import { places as allPlaces } from '../data/places.js';
+
+function googleSearch(name) {
+  return `https://www.google.com/search?q=${encodeURIComponent(name + ' Bangalore')}&tbm=isch`;
+}
 import './MustVisitScreen.css';
 
 function formatBudget(inr) {
@@ -142,6 +146,16 @@ export default function MustVisitScreen({ mustVisit, onToggleVisited, onAddManua
                       {place.distance_km > 0 && <span><MapPin size={11} /> {place.distance_km} km</span>}
                       <span><Wallet size={11} /> {formatBudget(place.budget_inr)}</span>
                     </div>
+                    <a
+                      href={googleSearch(place.name)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="list-google-btn"
+                      onClick={e => e.stopPropagation()}
+                    >
+                      <ExternalLink size={11} />
+                      See photos
+                    </a>
                   </div>
                   <button
                     className="must-remove-btn"
