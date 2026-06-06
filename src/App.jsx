@@ -281,52 +281,55 @@ export default function App() {
               transition={{ type: 'spring', damping: 32, stiffness: 300 }}
             >
               <div className="sheet-handle" />
+
+              {/* Header */}
               <div className="settings-header">
-                <h3 className="sheet-title" style={{ marginBottom: 0 }}>Settings</h3>
-                <button className="btn btn-ghost" style={{ padding: '6px' }} onClick={() => setShowSettings(false)}>
-                  <X size={18} />
+                <h3 className="settings-title">Settings</h3>
+                <button className="settings-close-btn" onClick={() => setShowSettings(false)} id="close-settings-btn">
+                  <X size={16} />
                 </button>
               </div>
 
-              <div className="settings-body">
-                <div className="settings-row">
-                  <div>
-                    <p className="settings-label">Reset all swipe data</p>
-                    <p className="settings-desc">Hold button for 2 seconds to confirm</p>
-                  </div>
-                  <div className="reset-btn-wrap">
-                    <button
-                      className="reset-btn"
-                      onMouseDown={startHold}
-                      onMouseUp={stopHold}
-                      onMouseLeave={stopHold}
-                      onTouchStart={startHold}
-                      onTouchEnd={stopHold}
-                      id="reset-data-btn"
-                    >
-                      <svg className="reset-progress" viewBox="0 0 36 36">
-                        <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2.5" />
-                        <circle
-                          cx="18" cy="18" r="15" fill="none"
-                          stroke="var(--reject)" strokeWidth="2.5"
-                          strokeDasharray={`${holdProgress * 0.942} 94.2`}
-                          strokeLinecap="round"
-                          transform="rotate(-90 18 18)"
-                        />
-                      </svg>
-                      <RotateCcw size={15} />
-                    </button>
-                  </div>
-                </div>
+              {/* Action cards stacked vertically */}
+              <div className="settings-actions">
 
-                <div className="settings-row">
-                  <div>
-                    <p className="settings-label">Change categories</p>
-                    <p className="settings-desc">Go back to category selection</p>
+                {/* Reset card */}
+                <div className="settings-card">
+                  <div className="settings-card-text">
+                    <p className="settings-card-label">Reset all data</p>
+                    <p className="settings-card-desc">Hold the button for 2s to confirm</p>
                   </div>
                   <button
-                    className="btn btn-secondary"
-                    style={{ padding: '8px 14px', fontSize: '0.8rem', borderRadius: '10px' }}
+                    className="reset-btn"
+                    onMouseDown={startHold}
+                    onMouseUp={stopHold}
+                    onMouseLeave={stopHold}
+                    onTouchStart={startHold}
+                    onTouchEnd={stopHold}
+                    id="reset-data-btn"
+                  >
+                    <svg className="reset-progress" viewBox="0 0 36 36">
+                      <circle cx="18" cy="18" r="15" fill="none" stroke="rgba(255,255,255,0.1)" strokeWidth="2.5" />
+                      <circle
+                        cx="18" cy="18" r="15" fill="none"
+                        stroke="var(--reject)" strokeWidth="2.5"
+                        strokeDasharray={`${holdProgress * 0.942} 94.2`}
+                        strokeLinecap="round"
+                        transform="rotate(-90 18 18)"
+                      />
+                    </svg>
+                    <RotateCcw size={15} />
+                  </button>
+                </div>
+
+                {/* Change category card */}
+                <div className="settings-card">
+                  <div className="settings-card-text">
+                    <p className="settings-card-label">Change categories</p>
+                    <p className="settings-card-desc">Go back to pick what to explore</p>
+                  </div>
+                  <button
+                    className="settings-action-btn"
                     onClick={() => { setShowSettings(false); setScreen(SCREEN.CATEGORY); }}
                     id="change-categories-btn"
                   >
@@ -334,6 +337,7 @@ export default function App() {
                     Change
                   </button>
                 </div>
+
               </div>
 
               <p className="settings-version">Made with love for Stuti ♡</p>
