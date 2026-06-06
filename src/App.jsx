@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Compass, Bookmark, RotateCcw, Star, Settings, X } from 'lucide-react';
+import { Compass, Bookmark, RotateCcw, Star, Settings, X, ChevronLeft } from 'lucide-react';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { places as allPlaces } from './data/places.js';
@@ -181,10 +181,14 @@ export default function App() {
       {activeTab === TAB.DISCOVER && (
         <div className="app-topbar">
           <div className="app-topbar-logo">
-            <svg width="20" height="20" viewBox="0 0 72 72" fill="none">
-              <path d="M36 56 C36 56 12 40 12 26 C12 18 18 12 24 12 C28 12 32 14 36 18 C40 14 44 12 48 12 C54 12 60 18 60 26 C60 40 36 56 36 56Z" fill="url(#tgGrad)" opacity="0.9"/>
-              <defs><linearGradient id="tgGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stopColor="#E8924A"/><stop offset="100%" stopColor="#C0395A"/></linearGradient></defs>
-            </svg>
+            <button
+              className="app-settings-btn"
+              style={{ width: '32px', height: '32px', marginRight: '4px', border: 'none', background: 'transparent' }}
+              onClick={() => setScreen(SCREEN.CATEGORY)}
+              id="back-to-categories-btn"
+            >
+              <ChevronLeft size={24} color="var(--primary)" />
+            </button>
             <span className="app-topbar-title">Bangalore <span>with Stuti</span></span>
           </div>
           <button
