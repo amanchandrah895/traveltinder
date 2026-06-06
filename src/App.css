@@ -81,14 +81,16 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: var(--max-w);
-  max-height: 90dvh;
+  max-height: 80vh;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   background: var(--surface);
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
   border-top: 1px solid var(--border);
-  padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 24px));
+  padding: 16px 20px calc(40px + env(safe-area-inset-bottom, 20px));
   z-index: 201;
+  box-shadow: 0 -4px 30px rgba(0,0,0,0.4);
 }
 
 .sheet-overlay {
@@ -132,9 +134,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 0;
+  padding: 12px 0;
   border-bottom: 1px solid var(--border);
-  gap: 16px;
+  gap: 12px;
 }
 
 .settings-label {

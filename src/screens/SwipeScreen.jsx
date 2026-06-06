@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import {
   MapPin, Clock, Wallet, X, Heart, Info,
   Bike, Train, Car, RotateCcw, ArrowRight
@@ -32,11 +33,11 @@ function PlaceCard({ place, onSwipe, isTop, style }) {
   const [showInfo, setShowInfo] = useState(false);
   const CommuteIcon = getCommuteIcon(place.commute);
 
-  const handleDragEnd = useCallback((_, info) => {
+  const handleDragEnd = useCallback(async (_, info) => {
     const threshold = 100;
     const velocity = info.velocity.x;
     if (Math.abs(info.offset.x) > threshold || Math.abs(velocity) > 400) {
-      if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(15);
+      try { await Haptics.impact({ style: ImpactStyle.Medium }); } catch (e) {}
       const dir = info.offset.x > 0 || velocity > 400 ? 'right' : 'left';
       animate(x, dir === 'right' ? 600 : -600, { duration: 0.35 });
       setTimeout(() => onSwipe(dir), 250);
@@ -242,8 +243,8 @@ export default function SwipeScreen({ cards, onSave, onSkip, onViewSaved, onView
       <div className="swipe-actions">
         <motion.button
           className="swipe-btn swipe-btn--skip"
-          onClick={() => {
-            if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(15);
+          onClick={async () => {
+            try { await Haptics.impact({ style: ImpactStyle.Medium }); } catch (e) {}
             if (cards[0]) onSkip(cards[0]);
           }}
           whileTap={{ scale: 0.9 }}
@@ -266,8 +267,8 @@ export default function SwipeScreen({ cards, onSave, onSkip, onViewSaved, onView
 
         <motion.button
           className="swipe-btn swipe-btn--save"
-          onClick={() => {
-            if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(15);
+          onClick={async () => {
+            try { await Haptics.impact({ style: ImpactStyle.Medium }); } catch (e) {}
             if (cards[0]) onSave(cards[0]);
           }}
           whileTap={{ scale: 0.9 }}

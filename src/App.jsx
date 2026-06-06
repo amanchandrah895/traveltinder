@@ -1,6 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Compass, Bookmark, RotateCcw, Star, Settings, X } from 'lucide-react';
+import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { useLocalStorage } from './hooks/useLocalStorage.js';
 import { places as allPlaces } from './data/places.js';
 import WelcomeScreen from './screens/WelcomeScreen.jsx';
@@ -125,18 +126,18 @@ export default function App() {
   }, [setSwipedIds, setSaved, setSkipped, setMustVisit, setSelectedCategories]);
 
   // Hold-to-reset logic
-  const startHold = () => {
-    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(15);
+  const startHold = async () => {
+    try { await Haptics.impact({ style: ImpactStyle.Light }); } catch (e) {}
     let prog = 0;
-    const interval = setInterval(() => {
+    const interval = setInterval(async () => {
       prog += 5;
       setHoldProgress(prog);
-      if (prog % 20 === 0 && window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate(10);
+      if (prog % 20 === 0) {
+        try { await Haptics.impact({ style: ImpactStyle.Light }); } catch (e) {}
       }
       if (prog >= 100) {
         clearInterval(interval);
-        if (window.navigator && window.navigator.vibrate) window.navigator.vibrate([30, 50, 30]);
+        try { await Haptics.impact({ style: ImpactStyle.Heavy }); } catch (e) {}
         handleReset();
         setHoldProgress(0);
       }
