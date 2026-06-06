@@ -1,0 +1,125 @@
+.welcome-screen {
+  position: relative;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 32px;
+}
+
+.bokeh-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bokeh-orb {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: bokehDrift ease-in-out infinite alternate;
+  filter: blur(40px);
+}
+
+@keyframes bokehDrift {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  33% { transform: translate(-50%, -50%) scale(1.2) translate(8px, -6px); opacity: 0.8; }
+  66% { transform: translate(-50%, -50%) scale(0.9) translate(-5px, 10px); opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.1) translate(6px, 5px); opacity: 0.7; }
+}
+
+.welcome-bloom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(ellipse, rgba(192,57,90,0.12) 0%, rgba(232,146,74,0.06) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  animation: bloomPulse 4s ease-in-out infinite alternate;
+}
+
+@keyframes bloomPulse {
+  from { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+  to { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  flex: 1;
+  justify-content: center;
+}
+
+.welcome-line {
+  width: 140px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--primary), var(--accent), transparent);
+  transform-origin: left;
+  border-radius: 99px;
+}
+
+.welcome-logo {
+  filter: drop-shadow(0 0 24px rgba(192,57,90,0.5)) drop-shadow(0 0 48px rgba(232,146,74,0.25));
+}
+
+.welcome-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 8vw, 2.6rem);
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.welcome-title-accent {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.welcome-subtitle {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-secondary);
+  letter-spacing: 0.03em;
+}
+
+.welcome-cta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.welcome-btn {
+  width: 100%;
+  max-width: 280px;
+  font-size: 1.05rem;
+  padding: 17px 32px;
+  letter-spacing: 0.02em;
+}
+
+.welcome-meta {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: normal;
+}
