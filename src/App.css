@@ -6,11 +6,11 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: var(--max-w);
-  height: 52px;
+  height: calc(52px + env(safe-area-inset-top, 0px));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: env(safe-area-inset-top, 0px) 16px 0;
   background: rgba(15,15,26,0.85);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
