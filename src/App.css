@@ -81,11 +81,13 @@
   transform: translateX(-50%);
   width: 100%;
   max-width: var(--max-w);
+  max-height: 90dvh;
+  overflow-y: auto;
   background: var(--surface);
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
   border-top: 1px solid var(--border);
-  padding: 12px 20px 48px;
+  padding: 12px 20px calc(24px + env(safe-area-inset-bottom, 24px));
   z-index: 201;
 }
 

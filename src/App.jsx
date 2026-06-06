@@ -126,12 +126,17 @@ export default function App() {
 
   // Hold-to-reset logic
   const startHold = () => {
+    if (window.navigator && window.navigator.vibrate) window.navigator.vibrate(15);
     let prog = 0;
     const interval = setInterval(() => {
       prog += 5;
       setHoldProgress(prog);
+      if (prog % 20 === 0 && window.navigator && window.navigator.vibrate) {
+        window.navigator.vibrate(10);
+      }
       if (prog >= 100) {
         clearInterval(interval);
+        if (window.navigator && window.navigator.vibrate) window.navigator.vibrate([30, 50, 30]);
         handleReset();
         setHoldProgress(0);
       }
